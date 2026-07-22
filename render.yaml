@@ -40,6 +40,9 @@ services:
     region: oregon
     plan: free
     maxmemoryPolicy: noeviction
+    ipAllowList:
+      - source: 0.0.0.0/0
+        description: internal-access
 
 databases:
   - name: leadagent-db
