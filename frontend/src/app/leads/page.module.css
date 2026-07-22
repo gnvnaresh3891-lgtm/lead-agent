@@ -1,0 +1,261 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  height: calc(100vh - 48px);
+  overflow: hidden;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.title {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.subtitle {
+  color: var(--text-muted);
+  font-size: 15px;
+}
+
+.viewToggle {
+  display: flex;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: 20px;
+  padding: 4px;
+}
+
+.toggleBtn {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  padding: 6px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.toggleBtn.active {
+  background: var(--bg-surface-active);
+  color: var(--text-primary);
+}
+
+.kanbanBoard {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  padding-bottom: 16px;
+  flex-grow: 1;
+}
+
+.kanbanColumn {
+  min-width: 300px;
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.columnHeader {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px;
+  background: var(--bg-surface);
+  border-radius: 12px;
+  border: 1px solid var(--border-subtle);
+}
+
+.columnDot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.columnTitle {
+  font-weight: 600;
+  font-size: 14px;
+  flex-grow: 1;
+}
+
+.columnCount {
+  font-size: 12px;
+  color: var(--text-muted);
+  background: var(--bg-surface-active);
+  padding: 2px 8px;
+  border-radius: 10px;
+}
+
+.columnCards {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  overflow-y: auto;
+  flex-grow: 1;
+  padding-right: 4px;
+}
+
+.leadCard {
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.leadCard:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  border-color: var(--border-hover);
+}
+
+.cardTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.leadName {
+  font-weight: 600;
+  font-size: 15px;
+  margin-bottom: 2px;
+}
+
+.leadCompany {
+  color: var(--text-secondary);
+  font-size: 13px;
+}
+
+.scoreBadge {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.scoreHigh {
+  color: var(--accent-green);
+  border: 2px solid var(--accent-green);
+  background: var(--accent-green-glow);
+}
+
+.scoreMed {
+  color: var(--accent-amber);
+  border: 2px solid var(--accent-amber);
+  background: var(--accent-amber-glow);
+}
+
+.scoreLow {
+  color: var(--text-muted);
+  border: 2px solid var(--text-muted);
+  background: rgba(107, 114, 128, 0.15);
+}
+
+.leadTitle {
+  color: var(--text-muted);
+  font-size: 13px;
+}
+
+.cardBottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.signalIndicators {
+  display: flex;
+  gap: 4px;
+}
+
+.signalDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.time {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.tableContainer {
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+  overflow: hidden;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.tableWrapper {
+  overflow-y: auto;
+  flex-grow: 1;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table th, .table td {
+  padding: 16px;
+  text-align: left;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.table th {
+  color: var(--text-muted);
+  font-weight: 500;
+  font-size: 13px;
+  position: sticky;
+  top: 0;
+  background: var(--bg-surface);
+  z-index: 10;
+}
+
+.table tr:hover td {
+  background: var(--bg-surface-hover);
+}
+
+.table td {
+  font-size: 14px;
+}
+
+.statusPill {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.signalCount {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 13px;
+}
+
+.signalIcon {
+  color: var(--accent-purple);
+}

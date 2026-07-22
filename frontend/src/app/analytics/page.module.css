@@ -1,0 +1,102 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.title {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.subtitle {
+  color: var(--text-muted);
+  font-size: 15px;
+}
+
+.chartsGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.chartCard {
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+  padding: 24px;
+}
+
+.chartTitle {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 24px;
+}
+
+.chartContainer {
+  height: 300px;
+  width: 100%;
+}
+
+.funnelContainer {
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+  padding: 24px;
+}
+
+.funnelTitle {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 24px;
+}
+
+.funnelStack {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+}
+
+.funnelRow {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  gap: 16px;
+}
+
+.funnelLabel {
+  width: 120px;
+  text-align: right;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.funnelBarWrapper {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.funnelBar {
+  height: 32px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 600;
+  font-size: 14px;
+  transition: width 1s ease-out;
+}
+
+.funnelPct {
+  width: 60px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
