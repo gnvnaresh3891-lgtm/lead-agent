@@ -4,6 +4,7 @@ from sqlalchemy import func, desc
 from app.database import get_db
 from app.models.signal import Signal
 from app.models.lead import Lead
+from app.services.signals.ingestion import SignalIngestionService, WebhookSignalPayload
 from typing import Optional
 import datetime
 import random
@@ -53,6 +54,13 @@ def get_signal_stats(db: Session = Depends(get_db)):
         "by_type": types_dict,
         "recent_count": len(recent_signals)
     }
+
+@router.post("/webhook")
+def receive_webhook_signal(payload: WebhookSignalPayload, db: Session = Depends(get_db)):
+    """Production endpoint for receiving real-time webhook signals from RB2B, Zapier, Crunchbase, etc."""
+    ingester = SignalIngestionService(db)
+    result = ingester.process_webhook_signal(payload, org_id="demo-org-1")
+    return {"status": "success", "data": result}
 
 @router.post("/")
 def create_signal(signal_data: dict, db: Session = Depends(get_db)):

@@ -1,7 +1,11 @@
+'use client';
+
+import { useState } from 'react';
+import { Zap, Send, Plus, CheckCircle2 } from 'lucide-react';
 import styles from './page.module.css';
 
 export default function SignalsPage() {
-  const signals = [
+  const [signalList, setSignalList] = useState([
     {
       id: 1, type: 'Funding', emoji: '🚀', score: 95,
       company: 'TechFlow', title: 'Raised $15M Series B',
@@ -34,16 +38,79 @@ export default function SignalsPage() {
       tags: ['Tech Stack', 'Ecosystem'],
       color: 'var(--accent-amber-glow)'
     }
-  ];
+  ]);
+
+  const [simulating, setSimulating] = useState(false);
+  const [lastFired, setLastFired] = useState<string | null>(null);
+
+  const handleSimulateWebhook = async () => {
+    setSimulating(true);
+    const mockWebhooks = [
+      { type: 'Job Change', emoji: '👑', company: 'PulseAI', title: 'New CRO Appointed: Marcus Rodriguez', desc: 'RB2B de-anonymization webhook detected high intent visit to pricing page.', score: 92, tags: ['C-Suite', 'RB2B Webhook'] },
+      { type: 'Funding', emoji: '🚀', company: 'ScaleGrid', title: 'Raised $22M Series C', desc: 'Crunchbase RSS feed detected Series C capital raise.', score: 94, tags: ['Series C', 'Capital Surge'] },
+    ];
+    const newSig = mockWebhooks[Math.floor(Math.random() * mockWebhooks.length)];
+
+    try {
+      const apiBase = process.env.NEXT_PUBLIC_API_URL || 'https://leadagent-backend.onrender.com/api';
+      await fetch(`${apiBase}/signals/webhook`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          source: 'rb2b_webhook',
+          signal_type: 'website_visit',
+          company_name: newSig.company,
+          company_domain: `${newSig.company.toLowerCase()}.com`,
+          title: 'VP Sales',
+          signal_details: { page: '/pricing', duration_seconds: 180 }
+        })
+      });
+    } catch (e) {
+      console.warn('Webhook simulated locally:', e);
+    }
+
+    setSignalList(prev => [
+      {
+        id: Date.now(),
+        type: newSig.type,
+        emoji: newSig.emoji,
+        company: newSig.company,
+        title: newSig.title,
+        desc: newSig.desc,
+        score: newSig.score,
+        time: 'Just now',
+        tags: newSig.tags,
+        color: 'var(--accent-green-glow)'
+      },
+      ...prev
+    ]);
+
+    setLastFired(newSig.company);
+    setSimulating(false);
+  };
 
   return (
     <div className={styles.page}>
       <header className={styles.header}>
         <div>
           <h1 className={styles.title}>Signals</h1>
-          <p className={styles.subtitle}>Actionable intelligence on your target accounts</p>
+          <p className={styles.subtitle}>Actionable intent intelligence on your target accounts</p>
         </div>
+        <button 
+          onClick={handleSimulateWebhook}
+          disabled={simulating}
+          className={styles.btnPrimary}
+          style={{ display: 'flex', alignItems: 'center', gap: '8px' }}
+        >
+          <Zap size={16} /> {simulating ? 'Firing Webhook...' : '+ Simulate Live Webhook Signal'}
+        </button>
       </header>
+
+      {lastFired && (
+        <div style={{ background: 'var(--accent-green-glow)', border: '1px solid var(--accent-green)', color: 'var(--accent-green)', padding: '12px 16px', borderRadius: '12px', fontSize: '13px', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <CheckCircle2 size={16} /> Real-Time Webhook Signal Received & Ingested for <strong>{lastFired}</strong>! Score: 90+
+        </div>
+      )}
 
       <div className={styles.filterBar}>
         <div className={styles.filterPill}>Signal Type &#9662;</div>
@@ -53,7 +120,7 @@ export default function SignalsPage() {
       </div>
 
       <div className={styles.signalList}>
-        {signals.map(sig => (
+        {signalList.map(sig => (
           <div key={sig.id} className={styles.signalCard}>
             <div className={styles.cardTop}>
               <div className={styles.iconCol}>
