@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { 
   LayoutDashboard, Zap, Users, Send, 
-  BarChart3, Shield, Settings, Globe, LogOut
+  BarChart3, Shield, Settings, LogOut
 } from 'lucide-react';
 import styles from './Sidebar.module.css';
 
@@ -17,7 +17,6 @@ const navItems = [
   { href: '/analytics', label: 'Analytics', icon: BarChart3 },
   { href: '/compliance', label: 'Compliance', icon: Shield },
   { href: '/settings', label: 'Settings', icon: Settings },
-  { href: '/', label: 'Landing Page', icon: Globe },
 ];
 
 export default function Sidebar() {
