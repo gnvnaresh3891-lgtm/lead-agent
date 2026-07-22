@@ -1,12 +1,12 @@
+version: "1"
 services:
-  # FastAPI Backend Service
   - type: web
     name: leadagent-backend
-    env: docker
-    dockerContext: ./backend
-    dockerfilePath: ./backend/Dockerfile
+    runtime: docker
+    dockerContext: backend
+    dockerfilePath: backend/Dockerfile
     region: oregon
-    plan: starter
+    plan: free
     envVars:
       - key: ENVIRONMENT
         value: production
@@ -20,13 +20,13 @@ services:
           name: leadagent-redis
           property: connectionString
 
-  # Background Worker (Signal Pipeline)
   - type: worker
     name: leadagent-worker
-    env: docker
-    dockerContext: ./backend
-    dockerfilePath: ./backend/Dockerfile
-    command: python -m app.services.signals.ingestion
+    runtime: docker
+    dockerContext: backend
+    dockerfilePath: backend/Dockerfile
+    region: oregon
+    plan: free
     envVars:
       - key: ENVIRONMENT
         value: production
@@ -35,15 +35,15 @@ services:
           name: leadagent-db
           property: connectionString
 
-  # Redis Service
   - type: redis
     name: leadagent-redis
-    ipAllowList: []
+    region: oregon
+    plan: free
+    maxmemoryPolicy: noeviction
 
 databases:
-  # PostgreSQL Database
   - name: leadagent-db
     databaseName: leadagent
     user: leadagent
     region: oregon
-    plan: starter
+    plan: free
