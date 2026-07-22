@@ -1,6 +1,7 @@
 'use client';
 
-import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, LineChart, Line, AreaChart, Area } from 'recharts';
+import { useState, useEffect } from 'react';
+import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, AreaChart, Area } from 'recharts';
 import styles from './page.module.css';
 
 const signalData = [
@@ -23,6 +24,12 @@ const trendData = [
 ];
 
 export default function AnalyticsPage() {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   return (
     <div className={styles.page}>
       <div>
@@ -57,51 +64,53 @@ export default function AnalyticsPage() {
         </div>
       </div>
 
-      <div className={styles.chartsGrid}>
-        <div className={styles.chartCard}>
-          <h3 className={styles.chartTitle}>Reply Rate by Signal Type</h3>
-          <div className={styles.chartContainer}>
-            <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={signalData} layout="vertical" margin={{ left: 20 }}>
-                <XAxis type="number" hide />
-                <YAxis dataKey="name" type="category" stroke="var(--text-muted)" fontSize={12} tickLine={false} axisLine={false} />
-                <Tooltip 
-                  cursor={{ fill: 'var(--bg-surface-hover)' }}
-                  contentStyle={{ background: 'var(--glass-bg)', border: '1px solid var(--glass-border)', borderRadius: '8px', color: 'var(--text-primary)' }}
-                />
-                <Bar dataKey="rate" fill="var(--accent-blue)" radius={[0, 4, 4, 0]} barSize={24} />
-              </BarChart>
-            </ResponsiveContainer>
+      {mounted && (
+        <div className={styles.chartsGrid}>
+          <div className={styles.chartCard}>
+            <h3 className={styles.chartTitle}>Reply Rate by Signal Type</h3>
+            <div className={styles.chartContainer}>
+              <ResponsiveContainer width="100%" height="100%">
+                <BarChart data={signalData} layout="vertical" margin={{ left: 20 }}>
+                  <XAxis type="number" hide />
+                  <YAxis dataKey="name" type="category" stroke="var(--text-muted)" fontSize={12} tickLine={false} axisLine={false} />
+                  <Tooltip 
+                    cursor={{ fill: 'var(--bg-surface-hover)' }}
+                    contentStyle={{ background: 'var(--glass-bg)', border: '1px solid var(--glass-border)', borderRadius: '8px', color: 'var(--text-primary)' }}
+                  />
+                  <Bar dataKey="rate" fill="var(--accent-blue)" radius={[0, 4, 4, 0]} barSize={24} />
+                </BarChart>
+              </ResponsiveContainer>
+            </div>
           </div>
-        </div>
 
-        <div className={styles.chartCard}>
-          <h3 className={styles.chartTitle}>Campaign Trends (30 Days)</h3>
-          <div className={styles.chartContainer}>
-            <ResponsiveContainer width="100%" height="100%">
-              <AreaChart data={trendData}>
-                <defs>
-                  <linearGradient id="colorSent" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor="var(--accent-blue)" stopOpacity={0.3}/>
-                    <stop offset="95%" stopColor="var(--accent-blue)" stopOpacity={0}/>
-                  </linearGradient>
-                  <linearGradient id="colorReplies" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor="var(--accent-green)" stopOpacity={0.3}/>
-                    <stop offset="95%" stopColor="var(--accent-green)" stopOpacity={0}/>
-                  </linearGradient>
-                </defs>
-                <XAxis dataKey="day" stroke="var(--text-muted)" fontSize={12} tickLine={false} axisLine={false} />
-                <YAxis stroke="var(--text-muted)" fontSize={12} tickLine={false} axisLine={false} />
-                <Tooltip 
-                  contentStyle={{ background: 'var(--glass-bg)', border: '1px solid var(--glass-border)', borderRadius: '8px', color: 'var(--text-primary)' }}
-                />
-                <Area type="monotone" dataKey="sent" stroke="var(--accent-blue)" fillOpacity={1} fill="url(#colorSent)" />
-                <Area type="monotone" dataKey="replies" stroke="var(--accent-green)" fillOpacity={1} fill="url(#colorReplies)" />
-              </AreaChart>
-            </ResponsiveContainer>
+          <div className={styles.chartCard}>
+            <h3 className={styles.chartTitle}>Campaign Trends (30 Days)</h3>
+            <div className={styles.chartContainer}>
+              <ResponsiveContainer width="100%" height="100%">
+                <AreaChart data={trendData}>
+                  <defs>
+                    <linearGradient id="colorSent" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="5%" stopColor="var(--accent-blue)" stopOpacity={0.3}/>
+                      <stop offset="95%" stopColor="var(--accent-blue)" stopOpacity={0}/>
+                    </linearGradient>
+                    <linearGradient id="colorReplies" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="5%" stopColor="var(--accent-green)" stopOpacity={0.3}/>
+                      <stop offset="95%" stopColor="var(--accent-green)" stopOpacity={0}/>
+                    </linearGradient>
+                  </defs>
+                  <XAxis dataKey="day" stroke="var(--text-muted)" fontSize={12} tickLine={false} axisLine={false} />
+                  <YAxis stroke="var(--text-muted)" fontSize={12} tickLine={false} axisLine={false} />
+                  <Tooltip 
+                    contentStyle={{ background: 'var(--glass-bg)', border: '1px solid var(--glass-border)', borderRadius: '8px', color: 'var(--text-primary)' }}
+                  />
+                  <Area type="monotone" dataKey="sent" stroke="var(--accent-blue)" fillOpacity={1} fill="url(#colorSent)" />
+                  <Area type="monotone" dataKey="replies" stroke="var(--accent-green)" fillOpacity={1} fill="url(#colorReplies)" />
+                </AreaChart>
+              </ResponsiveContainer>
+            </div>
           </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }
