@@ -4,18 +4,19 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { 
   LayoutDashboard, Zap, Users, Send, 
-  BarChart3, Shield, Settings 
+  BarChart3, Shield, Settings, Globe
 } from 'lucide-react';
 import styles from './Sidebar.module.css';
 
 const navItems = [
-  { href: '/', label: 'Dashboard', icon: LayoutDashboard },
+  { href: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
   { href: '/signals', label: 'Signals', icon: Zap },
   { href: '/leads', label: 'Leads', icon: Users },
   { href: '/campaigns', label: 'Campaigns', icon: Send },
   { href: '/analytics', label: 'Analytics', icon: BarChart3 },
   { href: '/compliance', label: 'Compliance', icon: Shield },
   { href: '/settings', label: 'Settings', icon: Settings },
+  { href: '/', label: 'Landing Page', icon: Globe },
 ];
 
 export default function Sidebar() {
