@@ -1,14 +1,13 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
-import Sidebar from '@/components/layout/Sidebar';
-import layoutStyles from './layout.module.css';
+import AppLayout from '@/components/layout/AppLayout';
 
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'SignalSDR — AI-Powered Sales Intelligence',
-  description: 'AI SDR Performance Dashboard',
+  title: 'SignalSDR — AI-Powered Sales Intelligence & SDR Agent',
+  description: 'Signal-driven outbound automation platform for B2B growth teams.',
 };
 
 export default function RootLayout({
@@ -19,10 +18,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <div className={layoutStyles.container}>
-          <Sidebar />
-          <main className={layoutStyles.mainContent}>{children}</main>
-        </div>
+        <AppLayout>{children}</AppLayout>
       </body>
     </html>
   );

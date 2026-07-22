@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { 
   Zap, ArrowRight, CheckCircle2, Shield, TrendingUp, 
   Users, Sparkles, Building, Layers, Sliders, DollarSign,
-  HelpCircle, ChevronRight
+  HelpCircle, ChevronRight, LogIn
 } from 'lucide-react';
 import styles from './page.module.css';
 
@@ -48,6 +48,57 @@ export default function LandingPage() {
 
   return (
     <div className={styles.landing}>
+      {/* Top Public Marketing Navigation Header */}
+      <header style={{
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        padding: '20px 40px',
+        borderBottom: '1px solid var(--glass-border)',
+        background: 'var(--glass-bg)',
+        backdropFilter: 'blur(20px)',
+        position: 'sticky',
+        top: 0,
+        zIndex: 100
+      }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+          <Zap size={28} color="var(--accent-blue)" />
+          <span style={{ fontSize: '20px', fontWeight: 800 }}>SignalSDR</span>
+        </div>
+
+        <nav style={{ display: 'flex', gap: '24px', fontSize: '14px', fontWeight: 500 }}>
+          <a href="#economics" style={{ color: 'var(--text-secondary)' }}>Economics</a>
+          <a href="#demo" style={{ color: 'var(--text-secondary)' }}>Live Demo</a>
+          <a href="#pricing" style={{ color: 'var(--text-secondary)' }}>Pricing</a>
+          <a href="#roi" style={{ color: 'var(--text-secondary)' }}>ROI Calculator</a>
+        </nav>
+
+        <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
+          <Link 
+            href="/login" 
+            style={{ 
+              color: 'var(--text-primary)', 
+              fontSize: '14px', 
+              fontWeight: 600, 
+              padding: '8px 16px',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '6px'
+            }}
+          >
+            <LogIn size={16} /> Sign In
+          </Link>
+
+          <Link 
+            href="/dashboard" 
+            className={styles.primaryBtn}
+            style={{ padding: '8px 18px', fontSize: '14px' }}
+          >
+            Launch App <ArrowRight size={16} />
+          </Link>
+        </div>
+      </header>
+
       {/* Hero Section */}
       <section className={styles.hero}>
         <div className={styles.heroBadge}>
@@ -66,11 +117,11 @@ export default function LandingPage() {
 
         <div className={styles.heroActions}>
           <Link href="/dashboard" className={styles.primaryBtn}>
-            Launch Dashboard <ArrowRight size={18} />
+            Launch App Dashboard <ArrowRight size={18} />
           </Link>
-          <a href="#pricing" className={styles.secondaryBtn}>
-            View Transparent Pricing
-          </a>
+          <Link href="/login" className={styles.secondaryBtn}>
+            Create Free Account
+          </Link>
         </div>
 
         <div className={styles.statsBar}>
@@ -90,7 +141,7 @@ export default function LandingPage() {
       </section>
 
       {/* Outbound Economics Breakdown */}
-      <section>
+      <section id="economics">
         <div className={styles.sectionHeader}>
           <div className={styles.sectionBadge}>Outbound Economics</div>
           <h2 className={styles.sectionTitle}>The $4,920 CAC Myth vs. True SDR Cost</h2>
@@ -142,7 +193,7 @@ export default function LandingPage() {
       </section>
 
       {/* Interactive Signal Demo */}
-      <section>
+      <section id="demo">
         <div className={styles.sectionHeader}>
           <div className={styles.sectionBadge}>Interactive Product Demo</div>
           <h2 className={styles.sectionTitle}>How Signals Turn Into Meetings</h2>
@@ -232,8 +283,8 @@ export default function LandingPage() {
               <li><CheckCircle2 size={14} color="var(--accent-green)" /> Email channel automation</li>
               <li><CheckCircle2 size={14} color="var(--accent-green)" /> Built-in compliance engine</li>
             </ul>
-            <Link href="/dashboard" className={styles.secondaryBtn} style={{ justifyContent: 'center' }}>
-              Get Started
+            <Link href="/login" className={styles.secondaryBtn} style={{ justifyContent: 'center' }}>
+              Sign Up
             </Link>
           </div>
 
@@ -255,7 +306,7 @@ export default function LandingPage() {
               <li><CheckCircle2 size={14} color="var(--accent-green)" /> Email + LinkedIn automation</li>
               <li><CheckCircle2 size={14} color="var(--accent-green)" /> HubSpot & Salesforce integration</li>
             </ul>
-            <Link href="/dashboard" className={styles.primaryBtn} style={{ justifyContent: 'center' }}>
+            <Link href="/login" className={styles.primaryBtn} style={{ justifyContent: 'center' }}>
               Start 14-Day Trial
             </Link>
           </div>
@@ -277,7 +328,7 @@ export default function LandingPage() {
               <li><CheckCircle2 size={14} color="var(--accent-green)" /> Multi-channel + voice agent</li>
               <li><CheckCircle2 size={14} color="var(--accent-green)" /> Priority support & SLA</li>
             </ul>
-            <Link href="/dashboard" className={styles.secondaryBtn} style={{ justifyContent: 'center' }}>
+            <Link href="/login" className={styles.secondaryBtn} style={{ justifyContent: 'center' }}>
               Go Scale
             </Link>
           </div>
@@ -297,7 +348,7 @@ export default function LandingPage() {
               <li><CheckCircle2 size={14} color="var(--accent-green)" /> Fine-tuned proprietary LLMs</li>
               <li><CheckCircle2 size={14} color="var(--accent-green)" /> Dedicated CSM & GTM engineer</li>
             </ul>
-            <Link href="/dashboard" className={styles.secondaryBtn} style={{ justifyContent: 'center' }}>
+            <Link href="/login" className={styles.secondaryBtn} style={{ justifyContent: 'center' }}>
               Contact Sales
             </Link>
           </div>
@@ -305,7 +356,7 @@ export default function LandingPage() {
       </section>
 
       {/* Interactive ROI Calculator */}
-      <section>
+      <section id="roi">
         <div className={styles.sectionHeader}>
           <div className={styles.sectionBadge}>Interactive ROI Calculator</div>
           <h2 className={styles.sectionTitle}>Calculate Your Cost Savings</h2>
@@ -356,9 +407,14 @@ export default function LandingPage() {
         <p style={{ color: 'var(--text-secondary)', maxWidth: '600px', margin: '0 auto' }}>
           Join high-growth B2B teams replacing generic outbound spam with signal-driven AI sales development.
         </p>
-        <Link href="/dashboard" className={styles.primaryBtn} style={{ padding: '16px 36px', fontSize: '18px' }}>
-          Launch SignalSDR Dashboard <ArrowRight size={20} />
-        </Link>
+        <div style={{ display: 'flex', gap: '16px', justifyContent: 'center', marginTop: '12px' }}>
+          <Link href="/login" className={styles.primaryBtn} style={{ padding: '16px 36px', fontSize: '18px' }}>
+            Start Free Trial <ArrowRight size={20} />
+          </Link>
+          <Link href="/dashboard" className={styles.secondaryBtn} style={{ padding: '16px 36px', fontSize: '18px' }}>
+            Launch App Dashboard
+          </Link>
+        </div>
       </section>
     </div>
   );
