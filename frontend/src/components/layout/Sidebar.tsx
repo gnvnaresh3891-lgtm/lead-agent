@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { 
   LayoutDashboard, Zap, Users, Send, 
-  BarChart3, Shield, Settings, LogOut
+  BarChart3, Shield, Settings, LogOut, Target
 } from 'lucide-react';
 import styles from './Sidebar.module.css';
 
@@ -15,6 +15,7 @@ const navItems = [
   { href: '/leads', label: 'Leads', icon: Users },
   { href: '/campaigns', label: 'Campaigns', icon: Send },
   { href: '/analytics', label: 'Analytics', icon: BarChart3 },
+  { href: '/agents', label: 'Agents Hub', icon: Target },
   { href: '/compliance', label: 'Compliance', icon: Shield },
   { href: '/settings', label: 'Settings', icon: Settings },
 ];

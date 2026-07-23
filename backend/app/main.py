@@ -3,6 +3,7 @@ from fastapi import FastAPI
 
 from app.api.health import router as health_router
 from app.api.signals import router as signals_router
+from app.api.agents import router as agents_router
 from app.core.config import settings
 from app.core.db import check_db_health, close_db_connection_pool, init_db_pool
 from app.core.redis_client import redis_client
@@ -47,3 +48,4 @@ app.add_middleware(TenantContextMiddleware)
 # Include API Routers
 app.include_router(signals_router)
 app.include_router(health_router)
+app.include_router(agents_router)
