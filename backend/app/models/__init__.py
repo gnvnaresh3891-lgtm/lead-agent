@@ -1,8 +1,15 @@
-from .organization import Organization
-from .user import User
-from .lead import Lead
-from .signal import Signal
-from .campaign import Campaign
-from .message import Message
-from .suppression import SuppressionEntry
-from .consent import ConsentRecord
+from app.models.base import Base, GUID, TenantMixin
+from app.models.lead import Lead
+from app.models.organization import Organization
+from app.models.signal import Signal
+from app.models.task_log import TaskLog
+
+__all__ = [
+    "Base",
+    "GUID",
+    "TenantMixin",
+    "Organization",
+    "Lead",
+    "Signal",
+    "TaskLog",
+]

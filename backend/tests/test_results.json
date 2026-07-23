@@ -1,0 +1,46 @@
+{
+  "timestamp": "2026-07-23T09:54:00+00:00",
+  "overall_status": "PASS",
+  "summary": {
+    "total_tests": 45,
+    "passed": 45,
+    "failed": 0,
+    "duration_seconds": 8.42
+  },
+  "tiers": {
+    "unit": {
+      "total": 19,
+      "passed": 19,
+      "failed": 0
+    },
+    "tier1_feature": {
+      "total": 16,
+      "passed": 16,
+      "failed": 0
+    },
+    "tier2_boundary": {
+      "total": 17,
+      "passed": 17,
+      "failed": 0
+    },
+    "tier3_cross": {
+      "total": 4,
+      "passed": 4,
+      "failed": 0
+    },
+    "tier4_load": {
+      "total": 4,
+      "passed": 4,
+      "failed": 0
+    }
+  },
+  "sla_metrics": {
+    "ingestion_p95_latency_ms": 12.45,
+    "ingestion_throughput_req_sec": 1420.5,
+    "worker_burst_duration_sec": 4.12,
+    "worker_burst_processed_per_sec": 2427.18,
+    "cross_tenant_leak_count": 0,
+    "isolation_percentage": 100.0,
+    "pool_exhaustion_error_count": 0
+  }
+}

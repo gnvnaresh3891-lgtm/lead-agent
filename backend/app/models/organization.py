@@ -1,19 +1,30 @@
-import uuid
 from datetime import datetime, timezone
-from sqlalchemy import Column, String, DateTime
-from sqlalchemy.orm import relationship
-from app.database import Base
+import uuid
+from typing import Optional
+from sqlalchemy import DateTime, String
+from sqlalchemy.orm import Mapped, mapped_column
+
+from app.models.base import Base, GUID
+
 
 class Organization(Base):
     __tablename__ = "organizations"
 
-    id = Column(String, primary_key=True, default=lambda: uuid.uuid4().hex)
-    name = Column(String, nullable=False)
-    domain = Column(String)
-    plan_tier = Column(String)
-    stripe_customer_id = Column(String)
-    created_at = Column(DateTime, default=lambda: datetime.now(timezone.utc))
+    id: Mapped[uuid.UUID] = mapped_column(
+        GUID(), primary_key=True, default=uuid.uuid4
+    )
+    name: Mapped[str] = mapped_column(String(255), nullable=False)
+    created_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True),
+        default=lambda: datetime.now(timezone.utc),
+        nullable=False,
+    )
+    updated_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True),
+        default=lambda: datetime.now(timezone.utc),
+        onupdate=lambda: datetime.now(timezone.utc),
+        nullable=False,
+    )
 
-    users = relationship("User", back_populates="organization")
-    leads = relationship("Lead", back_populates="organization")
-    campaigns = relationship("Campaign", back_populates="organization")
+    def __repr__(self) -> str:
+        return f"<Organization id={self.id} name='{self.name}'>"
