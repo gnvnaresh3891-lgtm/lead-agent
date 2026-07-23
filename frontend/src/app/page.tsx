@@ -140,6 +140,40 @@ export default function LandingPage() {
         </div>
       </section>
 
+      {/* Agents Feature Section */}
+      <section id="agents" style={{ padding: '80px 40px', background: 'var(--bg-surface)' }}>
+        <div className={styles.sectionHeader}>
+          <div className={styles.sectionBadge}>New Feature</div>
+          <h2 className={styles.sectionTitle}>Reddit Lead Agent</h2>
+          <p className={styles.sectionSubtitle}>
+            Find high-intent conversations on Reddit and engage with AI-crafted replies. Create an agent and start capturing leads in minutes.
+          </p>
+        </div>
+        
+        <div style={{ display: 'flex', justifyContent: 'center', marginTop: '40px' }}>
+          <div className={styles.compCard} style={{ maxWidth: '800px', width: '100%', borderColor: 'var(--accent-amber)' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '20px' }}>
+              <div style={{ background: 'rgba(255, 69, 0, 0.1)', padding: '12px', borderRadius: '12px' }}>
+                <Users size={32} color="#ff4500" />
+              </div>
+              <div>
+                <h3 style={{ fontSize: '24px', fontWeight: 700 }}>Autonomous Reddit Scraper</h3>
+                <p style={{ color: 'var(--text-secondary)' }}>Tracks subreddits like r/SaaS and r/sales for users complaining about competitors.</p>
+              </div>
+            </div>
+            <div style={{ background: 'var(--bg-primary)', padding: '24px', borderRadius: '12px', border: '1px solid var(--border-subtle)' }}>
+              <div style={{ fontSize: '13px', color: 'var(--text-muted)', marginBottom: '8px' }}>Live Signal Detected</div>
+              <div style={{ fontWeight: 600, fontSize: '16px', marginBottom: '4px' }}>"Looking for an alternative to Apollo..."</div>
+              <div style={{ color: 'var(--text-secondary)', fontSize: '14px', marginBottom: '16px' }}>Posted by u/growth_hacker_99 in r/SaaS</div>
+              <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+                <span style={{ background: 'rgba(16, 185, 129, 0.2)', color: 'var(--accent-green)', padding: '4px 12px', borderRadius: '12px', fontSize: '12px', fontWeight: 600 }}>Intent Score: 85/100</span>
+                <span style={{ background: 'rgba(59, 130, 246, 0.2)', color: 'var(--accent-blue)', padding: '4px 12px', borderRadius: '12px', fontSize: '12px', fontWeight: 600 }}>Action: AI Reply Drafted</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Outbound Economics Breakdown */}
       <section id="economics">
         <div className={styles.sectionHeader}>
