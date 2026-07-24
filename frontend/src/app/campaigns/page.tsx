@@ -15,7 +15,10 @@ export default function CampaignsPage() {
           <h1 className={styles.title}>Campaigns</h1>
           <p className={styles.subtitle}>Manage your automated outreach sequences</p>
         </div>
-        <button className={styles.btnPrimary}>+ New Campaign</button>
+        <div style={{ display: 'flex', gap: '12px' }}>
+          <a href="/campaigns/drafts" className={styles.btnSecondary} style={{ textDecoration: 'none', background: 'var(--glass-bg)', border: '1px solid var(--accent-blue)', color: 'var(--accent-blue)' }}>Review AI Drafts</a>
+          <button className={styles.btnPrimary}>+ New Campaign</button>
+        </div>
       </header>
 
       <div className={styles.grid}>

@@ -15,6 +15,7 @@ from app.core.tenancy import tenant_context
 from app.models.lead import Lead
 from app.models.signal import Signal
 from app.models.task_log import TaskLog
+from app.services.personalization.engine import DeterministicWriter
 
 logger = logging.getLogger(__name__)
 
@@ -66,6 +67,24 @@ class SignalWorker:
             payload_data = msg.get("payload") if isinstance(msg.get("payload"), dict) else msg
             score = float(msg.get("score", 0.0))
             trace_id = msg.get("trace_id") or str(uuid.uuid4())
+
+            # Ensure payload is a mutable dict
+            if not isinstance(payload_data, dict):
+                payload_data = {"data": payload_data}
+            
+            # --- Generate Zero-Cost AI Draft ---
+            # Build context from payload
+            context = {
+                "author": payload_data.get("author", "there"),
+                "company_name": payload_data.get("company_name", "your company"),
+                "subreddit": payload_data.get("subreddit", "the community"),
+                "title": payload_data.get("title", "your recent update"),
+                "keyword": payload_data.get("keyword", "that topic")
+            }
+            subject, body = DeterministicWriter.generate_draft(signal_type, context)
+            payload_data["ai_draft_subject"] = subject
+            payload_data["ai_draft_body"] = body
+            # -----------------------------------
 
             # Execute DB mutation under tenant_context
             with tenant_context(org_uuid):
